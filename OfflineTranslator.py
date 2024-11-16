@@ -1,4 +1,4 @@
-from layoutComponents.startTranslator import main
+from components.startTranslator import main
 
 if __name__ == "__main__":
     main()

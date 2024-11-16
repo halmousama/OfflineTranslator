@@ -5,8 +5,8 @@ from PIL import Image, UnidentifiedImageError
 from customtkinter import CTkFrame, CTkTextbox, CTkLabel, CTkImage
 from awesometkinter.bidirender import add_bidi_support, render_text
 import textract
-import layoutComponents.config as conf
-from layoutComponents.translateUtils import translate_from_image
+import components.config as conf
+from components.translateUtils import translate_from_image
 
 from_text = None
 to_text = None
@@ -67,7 +67,7 @@ def upload_image(img_btn):
             dark_image=Image.open(conf.img_path),
             size=(conf.textBoxWidth, int(conf.textBoxWidth / 2)),
         )
-        img_btn.configure(image=img)  
+        img_btn.configure(image=img)
         extraxt_text()
     except FileNotFoundError as e:
         print(e)
@@ -75,6 +75,7 @@ def upload_image(img_btn):
         print(f"Error: File is not a valid image. {e}")
     except Exception as e:
         print(f"Failed to load image: {e}")
+
 
 def translate_thread(text):
     global to_text
@@ -85,11 +86,13 @@ def translate_thread(text):
         to_text.insert("1.0", rendering_text)
     except Exception as e:
         print(f"Error translating text: {e}")
+
+
 def extraxt_text():
     global from_text, to_text
     try:
         text = textract.process(conf.img_path)
-        text = text.decode('utf-8')  # Decode bytes to string
+        text = text.decode("utf-8")  # Decode bytes to string
         # print(text)
         from_text.insert("1.0", text)
         threading.Thread(target=translate_thread, args=(text,), daemon=True).start()

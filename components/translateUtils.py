@@ -1,7 +1,7 @@
 import threading
 from transformers import MarianMTModel, MarianTokenizer
 from awesometkinter.bidirender import render_text
-import layoutComponents.config as config
+import components.config as config
 
 model_mappings = {
     ("en", "ar"): "Helsinki-NLP/opus-mt-en-ar",
@@ -12,19 +12,23 @@ model_mappings = {
     ("fr", "ar"): "Helsinki-NLP/opus-mt-fr-ar",
 }
 
+
 class TranslationState:
     def __init__(self):
         self.is_ready = True
         self.last_text = ""
 
+
 def translate_text(text):
     model_name = model_mappings.get((config.source_language, config.target_language))
     if not model_name:
-        raise ValueError(f"Translation from {config.source_language} to {config.target_language} is not supported.")
-    
+        raise ValueError(
+            f"Translation from {config.source_language} to {config.target_language} is not supported."
+        )
+
     model = MarianMTModel.from_pretrained(model_name)
     tokenizer = MarianTokenizer.from_pretrained(model_name)
-    
+
     lines = text.split("\n")
     translated_lines = []
     for line in lines:
@@ -33,10 +37,13 @@ def translate_text(text):
         else:
             inputs = tokenizer(line, return_tensors="pt", padding=True, truncation=True)
             translated = model.generate(**inputs)
-            translated_text = tokenizer.batch_decode(translated, skip_special_tokens=True)
+            translated_text = tokenizer.batch_decode(
+                translated, skip_special_tokens=True
+            )
             translated_lines.append(translated_text[0])
-    
+
     return "\n".join(translated_lines)
+
 
 def translate(from_text, to_text, state):
     current_text = from_text.get("1.0", "end-1c").strip()
@@ -44,7 +51,7 @@ def translate(from_text, to_text, state):
     # Skip if text hasn't changed
     if current_text == state.last_text:
         return
-    
+
     # Update last_text to current input
     state.last_text = current_text
 
@@ -66,15 +73,18 @@ def translate(from_text, to_text, state):
 
     threading.Thread(target=translate_thread, daemon=True).start()
 
-# function to run thread to translate text from image 
+
+# function to run thread to translate text from image
 def translate_from_image(from_text):
     model_name = model_mappings.get((config.source_language, config.target_language))
     if not model_name:
-        raise ValueError(f"Translation from {config.source_language} to {config.target_language} is not supported.")
-    
+        raise ValueError(
+            f"Translation from {config.source_language} to {config.target_language} is not supported."
+        )
+
     model = MarianMTModel.from_pretrained(model_name)
     tokenizer = MarianTokenizer.from_pretrained(model_name)
-    
+
     lines = from_text.split("\n")
     translated_lines = []
     for line in lines:
@@ -83,8 +93,9 @@ def translate_from_image(from_text):
         else:
             inputs = tokenizer(line, return_tensors="pt", padding=True, truncation=True)
             translated = model.generate(**inputs)
-            translated_text = tokenizer.batch_decode(translated, skip_special_tokens=True)
+            translated_text = tokenizer.batch_decode(
+                translated, skip_special_tokens=True
+            )
             translated_lines.append(translated_text[0])
-    
+
     return "\n".join(translated_lines)
-    

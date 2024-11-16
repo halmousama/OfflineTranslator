@@ -1,10 +1,4 @@
 {
-  "python.analysis.extraPaths": [
-    "./layoutComponents",
-    "./layoutComponents/tabs"
-  ],
-  "python.autoComplete.extraPaths": [
-    "./layoutComponents",
-    "./layoutComponents/tabs"
-  ]
+  "python.analysis.extraPaths": ["./components", "./components/tabs"],
+  "python.autoComplete.extraPaths": ["./components", "./components/tabs"]
 }

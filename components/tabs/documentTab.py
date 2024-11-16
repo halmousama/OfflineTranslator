@@ -1,8 +1,8 @@
 import os
 import threading
 from customtkinter import CTkFrame, CTkImage, CTkLabel, CTkTextbox
-import layoutComponents.config as conf
-from layoutComponents.translateUtils import translate_from_image
+import components.config as conf
+from components.translateUtils import translate_from_image
 from PIL import Image
 from tkinter import filedialog
 from awesometkinter.bidirender import add_bidi_support, render_text
@@ -65,7 +65,7 @@ def upload_document():
     try:
         if not os.path.isfile(file_path):
             raise FileNotFoundError(f"File not found: {file_path}")
-        
+
         textE = textract.process(file_path).decode("utf-8")
         from_text.insert("1.0", textE)
         threading.Thread(target=translate_thread, args=(textE,), daemon=True).start()

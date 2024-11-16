@@ -1,5 +1,3 @@
-Absolutely, here's the translated markdown code for your README.md:
-
 # Offline Translator Desktop App
 
 

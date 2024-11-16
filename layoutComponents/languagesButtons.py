@@ -94,7 +94,7 @@ def change_button_color( mode, button):
     # print("mode: ", mode, "\nLangs before: ", config.source_language, config.target_language)
     
     change_language(mode, langNameToLangCode(button.cget("text")))
-    print("Langs after: ", config.source_language, config.target_language)
+    # print("Langs after: ", config.source_language, config.target_language)
     if mode == "src":
         for b in config.language_buttons_source:
             if b == button:

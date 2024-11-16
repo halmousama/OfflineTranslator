@@ -3,7 +3,7 @@ from layoutComponents.menu_bar import create_menu_bar
 from layoutComponents.tabs4one import create_tabs
 from layoutComponents.theme_manager import initialize_theme
 from layoutComponents.languagesButtons import language_buttons
-from layoutComponents.scallingSlider import scallingSliderLayout
+# from layoutComponents.scallingSlider import scallingSliderLayout
 from layoutComponents.config import *
 
 def main():
@@ -14,7 +14,7 @@ def main():
     
     create_menu_bar(window)
     
-    scallingSliderLayout(window)
+    # scallingSliderLayout(window)
     
     language_buttons(window)
     

@@ -1,5 +1,4 @@
 from customtkinter import *
-from layoutComponents.theme_manager import change_theme
 import os
 from tkinter import filedialog
 from tkinter import messagebox
@@ -59,15 +58,4 @@ def create_menu_bar(master):
     help_menu.grid(row=0, column=3, padx=2, pady=10, sticky="ew")
     help_menu.set("Help")
 
-    # Theme selection menu
-    app_theme = CTkOptionMenu(
-        master=menu_bar_container,
-        values=["System", "Dark", "Light"],
-        height=20,
-        width=55,
-        command=lambda value: change_theme(app_theme.get()),
-    )
-    app_theme.grid(row=0, column=4, padx=0, pady=10, sticky="ew")
-    app_theme.set("Theme")
-    
     return menu_bar_container

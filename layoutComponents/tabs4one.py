@@ -2,6 +2,8 @@ from customtkinter import CTkTabview
 from awesometkinter.bidirender import add_bidi_support, render_text
 from layoutComponents.tabs.textTab import text_tab_layout
 from layoutComponents.tabs.imageTab import image_tab_layout
+# from layoutComponents.tabs.audioTab import audio_tab_layout
+from layoutComponents.tabs.documentTab import document_tab_layout
 
 
 def create_tabs(master):
@@ -20,5 +22,7 @@ def create_tabs(master):
     text_tab_layout(text_tab)
 
     image_tab_layout(image_tab)
+
+    document_tab_layout(document_tab)
 
     return tabs

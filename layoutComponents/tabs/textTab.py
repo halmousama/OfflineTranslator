@@ -1,6 +1,6 @@
 from customtkinter import CTkFrame, CTkTextbox
 from awesometkinter.bidirender import add_bidi_support
-from layoutComponents.translateUtils import translate 
+from layoutComponents.translateUtils import translate, TranslationState
 from layoutComponents.config import *
 
 def text_tab_layout(master):
@@ -12,5 +12,14 @@ def text_tab_layout(master):
     to_text.grid(row=0, column=2, padx=10, pady=10, sticky="nsew")
     add_bidi_support(from_text)
     add_bidi_support(to_text)
-    from_text.bind("<space>", lambda event: translate(from_text, to_text), add="+")
-    from_text.bind("<Return>", lambda event: translate(from_text, to_text), add="+")
+
+    # Initialize translation state
+    translation_state = TranslationState()
+
+    # Bind translation triggers
+    def on_key(event):
+        if translation_state.is_ready:
+            translate(from_text, to_text, translation_state)
+    
+    from_text.bind("<space>", on_key, add="+")
+    from_text.bind("<Return>", on_key, add="+")

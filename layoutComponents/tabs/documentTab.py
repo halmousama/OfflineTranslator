@@ -1,12 +1,12 @@
 import os
 import threading
 from customtkinter import CTkFrame, CTkImage, CTkLabel, CTkTextbox
-from layoutComponents.config import conf
+import layoutComponents.config as conf
 from layoutComponents.translateUtils import translate_from_image
 from PIL import Image
 from tkinter import filedialog
 from awesometkinter.bidirender import add_bidi_support, render_text
-from textract import textract
+import textract
 
 from_text = None
 to_text = None

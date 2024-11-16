@@ -1,4 +1,4 @@
-textBoxWidth = 375
+textBoxWidth = 550
 source_language = "en"
 target_language = "ar"
 language_buttons_source = []

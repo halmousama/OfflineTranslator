@@ -1,20 +1,14 @@
-from customtkinter import CTk
-from layoutComponents.menu_bar import create_menu_bar
+from customtkinter import CTk, set_appearance_mode, set_default_color_theme
 from layoutComponents.tabs4one import create_tabs
-from layoutComponents.theme_manager import initialize_theme
 from layoutComponents.languagesButtons import language_buttons
-# from layoutComponents.scallingSlider import scallingSliderLayout
 from layoutComponents.config import *
 
 def main():
-    initialize_theme()
+    set_appearance_mode("system") 
+    set_default_color_theme("blue")
     
     window = CTk()
     window.title("Offline Translator")
-    
-    create_menu_bar(window)
-    
-    # scallingSliderLayout(window)
     
     language_buttons(window)
     

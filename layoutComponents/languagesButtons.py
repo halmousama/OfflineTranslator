@@ -7,31 +7,29 @@ def language_buttons(master):
     language_buttons_container = CTkFrame(master=master)
     language_buttons_container.pack(padx=10, pady=10, fill="both", expand=True)
 
-    config.source_language_container = CTkFrame(master=language_buttons_container, width=config.textBoxWidth + 100)
-    config.source_language_container.grid(row=0, column=0, padx=10, pady=10, sticky="w")
-    spacing = CTkFrame(master=language_buttons_container, width=config.textBoxWidth)
+    config.source_language_container = CTkFrame(master=language_buttons_container)
+    config.source_language_container.grid(row=0, column=0, padx=10, pady=10, sticky="nsew")
+    spacing = CTkFrame(master=language_buttons_container)
     spacing.grid(row=0, column=1, padx=10, pady=10)
-    img = CTkImage(light_image=Image.open("/home/ous/Documents/vscode/PYTHON/Translator_App/img/double-fleche.png"), dark_image=Image.open("/home/ous/Documents/vscode/PYTHON/Translator_App/img/double-fleche.png"))
-    img_btn = CTkButton(spacing, image=img, text="", width=30, bg_color="transparent", fg_color="transparent", hover_color="#2f2f2f", border_width=0, command=lambda: inverse_language())
+    img = CTkImage(light_image=Image.open("img/double-fleche.png"), dark_image=Image.open("img/double-fleche.png"))
+    img_btn = CTkButton(spacing, image=img, text="", bg_color="transparent", fg_color="transparent", hover_color="#2f2f2f", border_width=0, command=lambda: inverse_language())
     img_btn.grid(row=0, column=1, padx=10, pady=10, sticky="nsew")
     config.target_language_container = CTkFrame(master=language_buttons_container)
-    config.target_language_container.grid(row=0, column=2, padx=10, pady=10, sticky="e")
+    config.target_language_container.grid(row=0, column=2, padx=10, pady=10, sticky="nsew")
 
     config.language_buttons_source.extend([
-        CTkButton(config.source_language_container, text="English", width=60),
-        CTkButton(config.source_language_container, text="Arabic", width=60),
-        CTkButton(config.source_language_container, text="French", width=60),
-        CTkOptionMenu(config.source_language_container, values=["Other...", "Espanol", "Hindi", "Italiano", "Portugues", "Roma"], width=60)
+        CTkButton(config.source_language_container, text="English"),
+        CTkButton(config.source_language_container, text="Arabic"),
+        CTkButton(config.source_language_container, text="French"),
     ])
 
     for i, button in enumerate(config.language_buttons_source):
         button.grid(row=0, column=i, padx=10, pady=10, sticky="nsew")
 
     config.language_buttons_target.extend([
-        CTkButton(config.target_language_container, text="English", width=60),
-        CTkButton(config.target_language_container, text="Arabic", width=60),
-        CTkButton(config.target_language_container, text="French", width=60),
-        CTkOptionMenu(config.target_language_container, values=["Other...", "Espanol", "Hindi", "Italiano", "Portugues", "Roma"], width=60)
+        CTkButton(config.target_language_container, text="English"),
+        CTkButton(config.target_language_container, text="Arabic"),
+        CTkButton(config.target_language_container, text="French"),
     ])
 
     for i, button in enumerate(config.language_buttons_target):
@@ -48,37 +46,27 @@ def langNameToLangCode(langName):
     return {
         "English": "en",
         "Arabic": "ar",
-        "French": "fr",
-        "Espanol": "es",
-        "Hindi": "hi",
-        "Italiano": "it",
-        "Portugues": "pt",
-        "Roma": "ro"
-    }.get(langName, "other")
+        "French": "fr"
+    }.get(langName, "English")
 def langCodeToLangName(langCode):
     return {
         "en": "English",
         "ar": "Arabic",
-        "fr": "French",
-        "es": "Espanol",
-        "hi": "Hindi",
-        "it": "Italiano",
-        "pt": "Portugues",
-        "ro": "Roma"
-    }.get(langCode, "other")
+        "fr": "French"
+    }.get(langCode, "English")
 def langNameToButton(mode,langName):
     if mode == "src":
         return {
             "English": config.language_buttons_source[0],
             "Arabic": config.language_buttons_source[1],
-            "French": config.language_buttons_source[2]
-        }.get(langName, "other")
+            "French": config.language_buttons_source[2],
+        }.get(langName, "English")
     elif mode == "tgt":
         return {
             "English": config.language_buttons_target[0],
             "Arabic": config.language_buttons_target[1],
             "French": config.language_buttons_target[2]
-        }.get(langName, "other")
+        }.get(langName, "English")
 def change_language(mode, language):
     if mode == "src":
         config.source_language = language

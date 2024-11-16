@@ -55,7 +55,30 @@ def langNameToLangCode(langName):
         "Portugues": "pt",
         "Roma": "ro"
     }.get(langName, "other")
-
+def langCodeToLangName(langCode):
+    return {
+        "en": "English",
+        "ar": "Arabic",
+        "fr": "French",
+        "es": "Espanol",
+        "hi": "Hindi",
+        "it": "Italiano",
+        "pt": "Portugues",
+        "ro": "Roma"
+    }.get(langCode, "other")
+def langNameToButton(mode,langName):
+    if mode == "src":
+        return {
+            "English": config.language_buttons_source[0],
+            "Arabic": config.language_buttons_source[1],
+            "French": config.language_buttons_source[2]
+        }.get(langName, "other")
+    elif mode == "tgt":
+        return {
+            "English": config.language_buttons_target[0],
+            "Arabic": config.language_buttons_target[1],
+            "French": config.language_buttons_target[2]
+        }.get(langName, "other")
 def change_language(mode, language):
     if mode == "src":
         config.source_language = language
@@ -64,8 +87,8 @@ def change_language(mode, language):
 
 def inverse_language():
     config.source_language, config.target_language = config.target_language, config.source_language
-    change_button_color("src",config.source_language)
-    change_button_color("tgt",config.target_language)
+    change_button_color("src",langNameToButton("src",langCodeToLangName(config.source_language)))
+    change_button_color("tgt",langNameToButton("tgt",langCodeToLangName(config.target_language)))
 
 def change_button_color( mode, button):
     # print("mode: ", mode, "\nLangs before: ", config.source_language, config.target_language)

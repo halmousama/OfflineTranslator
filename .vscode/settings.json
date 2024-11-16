@@ -1,0 +1,10 @@
+{
+  "python.analysis.extraPaths": [
+    "./layoutComponents",
+    "./layoutComponents/tabs"
+  ],
+  "python.autoComplete.extraPaths": [
+    "./layoutComponents",
+    "./layoutComponents/tabs"
+  ]
+}
